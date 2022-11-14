@@ -2,7 +2,7 @@
     0% {bottom: -100%;}
     20% {bottom: 100px;}
     80% {bottom: 100px;}
-    10% {bottom: 100%;}
+    100% {bottom: 100%;}
 }
 
 .show-notification{
