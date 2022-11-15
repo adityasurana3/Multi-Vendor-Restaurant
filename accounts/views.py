@@ -12,7 +12,7 @@ from vendor.models import Vendor
 
 # Create your views here.
 
-# Restrict the vendor from accessing the customer page
+# Restrict the customer from accessing the vendor page
 def check_role_vendor(user):
     if user.role == 1:
         return True
