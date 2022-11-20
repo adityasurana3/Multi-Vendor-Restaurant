@@ -29,10 +29,17 @@
                                         <td class="text-left">{{forloop.counter}}</td>
                                         <td class="text-left"><img src = {{fooditem.image.url}} alt="Food Image" width="40px"></img></td>
                                         <td class="text-left">
-                                            <a href="#"><p class="mb-0 font-weight-bold">{{fooditem.food_title}}</p>
+                                            <a href="{% url 'edit_food' fooditem.id %}"><p class="mb-0 font-weight-bold">{{fooditem.food_title}}</p>
                                             <small class="text-muted">{{fooditem.description}}</small></a>
                                         </td>
-                                        <td><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash text-danger" aria-hidden="true"></i></td>
+                                        <td>
+                                            {% if fooditem.is_available %}
+                                                <span class="badge badge-success">Available</span>
+                                            {% else %}
+                                                <span class="badge badge-danget">Not Available</span>
+                                            {% endif %}
+                                        </td>
+                                        <td><a href="{% url 'edit_food' fooditem.id %}" style="color:unset;"><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp; <a href="{% url 'delete_food' fooditem.id %}" onclick="return confirm('Are you sure you want to delete?')"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a></td>
                                     </tr>
                                     {% endfor %}
                                     </tbody>
@@ -40,7 +47,7 @@
                               {% else %}
                               <h5 class="text-center">No food items found for the {{category.category_name}} category</h5>
                               <div class="text-center">
-                                <a href="" class = "btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Add Food</a>
+                                <a href="{% url 'add_food' %}" class = "btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> &nbsp; Add Food</a>
                               </div>
                              
                               {% endif %}
