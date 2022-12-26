@@ -1,4 +1,5 @@
 from .models import Cart
+import datetime
 
 def get_cart_counter(request):
     cart_count = 0
@@ -14,3 +15,4 @@ def get_cart_counter(request):
         except:
             cart_count = 0
     return dict(cart_count=cart_count)
+
