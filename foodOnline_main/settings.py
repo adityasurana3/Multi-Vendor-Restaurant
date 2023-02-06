@@ -72,6 +72,7 @@ TEMPLATES = [
                 'accounts.context_processor.get_vendor',
                 'accounts.context_processor.get_google_api',
                 'marketplace.context_processor.get_cart_counter',
+                'marketplace.context_processor.get_cart_amounts'
             ],
         },
     },
@@ -158,4 +159,4 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'foodOnline <ghuiianishh@gmail.com>'
 
-GOOGLE_API_KEY = 'AIzaSyDHIfZ5jkwnTm0YdBXSebDR8k6Wl8JWaRQ'
+GOOGLE_API_KEY = 'AIzaSyA1F4R_QASLq4AyHv-eH46iny5ZK9VOUgM'
