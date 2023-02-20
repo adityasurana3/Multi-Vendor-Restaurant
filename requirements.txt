@@ -6,3 +6,17 @@ Pillow==9.3.0
 psycopg2-binary==2.9.5
 python-decouple==3.6
 sqlparse==0.4.3
+GDAL
+
+# To install GDAL in UBUNTU
+
+# sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update
+# sudo apt-get update
+# sudo apt-get install gdal-bin
+# sudo apt-get install libgdal-dev
+# export CPLUS_INCLUDE_PATH=/usr/include/gdal
+# export C_INCLUDE_PATH=/usr/include/gdal
+# pip install GDAL
+
+# To install GDAL in windows
+# https://rathank.com/install-postgis-and-gdal-for-django-on-windows/

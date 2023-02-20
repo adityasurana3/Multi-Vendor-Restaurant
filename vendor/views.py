@@ -84,7 +84,8 @@ def add_category(request):
             category_name = form.cleaned_data['category_name']
             category=form.save(commit=False)
             category.vendor = Vendor.objects.get(user=request.user)
-            category.slug = slugify(category_name)
+            category.save() #this will generate the id for category
+            category.slug = slugify(category_name)+'-'+str(category.id)
             category.save()
             # OR
             # form.save()
@@ -142,7 +143,7 @@ def add_food(request):
             fooditem = form.cleaned_data['food_title']
             food = form.save(commit=False)
             food.vendor = get_vendor(request)
-            food.sluf = slugify(fooditem)
+            food.slug = slugify(fooditem)
             food.save()
             messages.success(request,"Food Idem added successfullt")
             return redirect('fooditems_by_category', food.category.id)

@@ -27,7 +27,7 @@ function onPlaceChanged (){
     var address = document.getElementById('id_address').value
 
     geocoder.geocode({"address":address},function(results,status){
-        if(status==google.maps.GeocodersStatus.OK){
+        if(status==google.maps.GeocoderStatus.OK){
             var latitude = results[0].geometry.location.lat();
             var longitude = results[0].geometry.location.lng();
 
