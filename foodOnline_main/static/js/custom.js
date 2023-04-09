@@ -69,7 +69,7 @@ $(document).ready(function(){
         data = {
             food_id:food_id,
         }
-        console.log("data=>",data)
+        // console.log("data=>",data)
         $.ajax({
             type : 'GET',
             url:url,
@@ -86,7 +86,7 @@ $(document).ready(function(){
                 console.log(responce)
                 $('#cart-counter').html(responce.cart_counter['cart_count'])
                 $('#qty-'+food_id).html(responce.qty)
-                applyCartAmount(responce.cart_amount['subtotal'],responce.cart_amount['tax'],responce.cart_amount['grand_total'])
+                applyCartAmount(responce.cart_amount['subtotal'],responce.cart_amount['tax_dict'],responce.cart_amount['grand_total'])
                 }
             }
         })
@@ -122,7 +122,7 @@ $(document).ready(function(){
                 }else{
                     $('#cart-counter').html(responce.cart_counter['cart_count'])
                     $('#qty-'+food_id).html(responce.qty)
-                    applyCartAmount(responce.cart_amount['subtotal'],responce.cart_amount['tax'],responce.cart_amount['grand_total'])
+                    applyCartAmount(responce.cart_amount['subtotal'],responce.cart_amount['tax_dict'],responce.cart_amount['grand_total'])
                     if (window.location.pathname == '/cart/'){
                         removeCartItem(responce.qty,cart_id);
                         checkEmptyCart();
@@ -150,7 +150,7 @@ $(document).ready(function(){
                 }else{
                     $('#cart-counter').html(responce.cart_counter['cart_count'])
                     swal(responce.status,responce.message,"success")
-                    applyCartAmount(responce.cart_amount['subtotal'],responce.cart_amount['tax'],responce.cart_amount['grand_total'])
+                    applyCartAmount(responce.cart_amount['subtotal'],responce.cart_amount['tax_dict'],responce.cart_amount['grand_total'])
                     removeCartItem(0,cart_id);
                     checkEmptyCart()
                 }
@@ -171,14 +171,17 @@ $(document).ready(function(){
     }
 
     // Apply cart amount
-    function applyCartAmount(subtotal,tax,grand_total){
+    function applyCartAmount(subtotal,tax_dict,grand_total){
         if (window.location.pathname == '/cart/'){
             // Using JQuery
             
             $('#subtotal').html(subtotal)
-            $('#tax').html(tax)
             $('#total').html(grand_total)
-            
+            for(key1 in tax_dict){
+                for(key2 in tax_dict[key1]){
+                    $("#tax-"+key1).html(tax_dict[key1][key2])
+                }
+            }
             // Using JavaScript
             // document.getElementById('subtotal').innerHTML = subtotal
             // document.getElementById('tax').innerHTML = tax
