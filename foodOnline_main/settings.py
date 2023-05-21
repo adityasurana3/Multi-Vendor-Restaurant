@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'marketplace',
     'django.contrib.gis',
     'customers',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -75,7 +76,8 @@ TEMPLATES = [
                 'accounts.context_processor.get_google_api',
                 'accounts.context_processor.get_user_profile',
                 'marketplace.context_processor.get_cart_counter',
-                'marketplace.context_processor.get_cart_amounts'
+                'marketplace.context_processor.get_cart_amounts',
+                'accounts.context_processor.get_paypal_client_id'
             ],
         },
     },
@@ -164,3 +166,10 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'foodOnline <ghuiianishh@gmail.com>'
 
 GOOGLE_API_KEY = config('GOOGLE_API_KEY')
+
+PAYPAL_CLIENT_ID = config('PAYPAL_CLIENT_ID')
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
+
+RZP_KEY_ID = config('RZP_KEY_ID')
+RZP_KEY_SECRET = config('RZP_KEY_SECRET')
