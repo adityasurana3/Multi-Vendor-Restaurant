@@ -13,6 +13,7 @@ from django.template.defaultfilters import slugify
 from orders.models import Order
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
+import datetime
 
 # Create your views here.
 
@@ -167,7 +168,29 @@ def custDashboard(request):
 @login_required(login_url='login')
 @user_passes_test(check_role_vendor)
 def vendorDashboard(request):
-    return render(request,'accounts/vendorDashboard.html')
+    vendor = Vendor.objects.get(user = request.user)
+    orders = Order.objects.filter(vendors__in = [vendor.id], is_ordered = True).order_by('-created_at')
+    recent_orders = orders[:5]
+
+    # current months revenue
+    current_month = datetime.datetime.now().month
+    current_month_order = orders.filter(vendors__in=[vendor.id],created_at__month = current_month)
+    current_month_revenue = 0
+    for i in current_month_order:
+        current_month_revenue += i.get_total_by_vendor()['grand_total']
+
+    # total_revenue
+    total_revenue = 0
+    for i in orders:
+        total_revenue += i.get_total_by_vendor()['grand_total']
+    context = {
+        'orders':orders,
+        'order_count':orders.count(),
+        'recent_orders':recent_orders,
+        'total_revenue':total_revenue,
+        'current_month_revenue':current_month_revenue,
+    }
+    return render(request,'accounts/vendorDashboard.html', context)
 
 def forgot_password(request):
     if request.method == 'POST':
